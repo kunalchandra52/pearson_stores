@@ -1,0 +1,5 @@
+package com.ty.stores.model;
+
+public class Store {
+
+}

@@ -1,0 +1,75 @@
+package com.ty.stores.config;
+
+import org.springframework.batch.core.Job;
+import org.springframework.batch.core.Step;
+import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
+import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
+import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
+import org.springframework.batch.core.launch.support.RunIdIncrementer;
+import org.springframework.batch.item.file.FlatFileItemReader;
+import org.springframework.batch.item.file.LineMapper;
+import org.springframework.batch.item.file.mapping.BeanWrapperFieldSetMapper;
+import org.springframework.batch.item.file.mapping.DefaultLineMapper;
+import org.springframework.batch.item.file.transform.DelimitedLineTokenizer;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.ClassPathResource;
+
+import com.ty.stores.model.Store;
+
+@Configuration
+@EnableBatchProcessing
+public class BatchConfig {
+
+
+	@Autowired
+	private JobBuilderFactory jobBuilderFactory;
+
+	@Autowired
+	private StepBuilderFactory factory;
+
+	@Bean
+	public FlatFileItemReader<Store> reader() {
+		FlatFileItemReader<Store> reader = new FlatFileItemReader<>();
+		reader.setResource(new ClassPathResource("stores.csv"));
+		reader.setLineMapper(getLineMapper());
+		reader.setLinesToSkip(1);
+		return reader;
+	}
+
+	private LineMapper<Store> getLineMapper() {
+		DefaultLineMapper<Store> lineMapper = new DefaultLineMapper<>();
+
+		DelimitedLineTokenizer tokenizer = new DelimitedLineTokenizer();
+		tokenizer.setNames(new String[] { "Store id", "PostCode", "City", "Address", "Open Date" });
+		tokenizer.setIncludedFields(new int[] { 0, 1, 2, 4 });
+
+		BeanWrapperFieldSetMapper<Store> fSetter = new BeanWrapperFieldSetMapper<>();
+		fSetter.setTargetType(Store.class);
+		lineMapper.setLineTokenizer(tokenizer);
+		lineMapper.setFieldSetMapper(fSetter);
+		return lineMapper;
+	}
+
+	@Bean
+	public StoreItemProcessor processor() {
+		return new StoreItemProcessor();
+	}
+
+
+	@Bean
+	public Job impStoreJob() {
+
+		return this.jobBuilderFactory.get("Store-Import").incrementer(new RunIdIncrementer()).flow(step01()).end()
+				.build();
+	}
+
+	@Bean
+	public Step step01() {
+		return this.factory.get("step01").<Store, Store>chunk(10).reader(reader()).processor(processor())
+				.build();
+
+	}
+
+}

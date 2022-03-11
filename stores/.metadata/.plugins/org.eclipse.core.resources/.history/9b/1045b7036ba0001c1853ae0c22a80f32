@@ -1,0 +1,15 @@
+package com.ty.stores.config;
+
+import org.springframework.batch.item.ItemProcessor;
+
+import com.ty.stores.model.Store;
+
+public class StoreItemProcessor implements ItemProcessor<Store, Store> {
+
+	@Override
+	public Store process(Store item) throws Exception {
+		// TODO Auto-generated method stub
+		return item;
+	}
+
+}

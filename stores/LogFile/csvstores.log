@@ -1,0 +1,32 @@
+2022-03-11 10:01:38,060 [restartedMain] [36mc.t.s.StoresApplication[0;39m - Starting StoresApplication using Java 15.0.2 on DESKTOP-JRDDDDU with PID 11560 (C:\Users\user\Downloads\stores\target\classes started by user in C:\Users\user\Downloads\stores) 
+2022-03-11 10:01:38,063 [restartedMain] [36mc.t.s.StoresApplication[0;39m - No active profile set, falling back to 1 default profile: "default" 
+2022-03-11 10:01:38,155 [restartedMain] [36mo.s.b.d.e.DevToolsPropertyDefaultsPostProcessor[0;39m - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable 
+2022-03-11 10:01:38,156 [restartedMain] [36mo.s.b.d.e.DevToolsPropertyDefaultsPostProcessor[0;39m - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG' 
+2022-03-11 10:01:39,903 [restartedMain] [36mo.s.b.w.e.t.TomcatWebServer[0;39m - Tomcat initialized with port(s): 8080 (http) 
+2022-03-11 10:01:39,925 [restartedMain] [36mo.a.c.c.StandardService[0;39m - Starting service [Tomcat] 
+2022-03-11 10:01:39,926 [restartedMain] [36mo.a.c.c.StandardEngine[0;39m - Starting Servlet engine: [Apache Tomcat/9.0.58] 
+2022-03-11 10:01:40,059 [restartedMain] [36mo.a.c.c.C.[.[.[/][0;39m - Initializing Spring embedded WebApplicationContext 
+2022-03-11 10:01:40,060 [restartedMain] [36mo.s.b.w.s.c.ServletWebServerApplicationContext[0;39m - Root WebApplicationContext: initialization completed in 1897 ms 
+2022-03-11 10:01:40,340 [restartedMain] [36mo.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext[0;39m - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'storeController': Unsatisfied dependency expressed through field 'implementation'; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type 'com.ty.stores.service.ServiceImplementation' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)} 
+2022-03-11 10:01:40,343 [restartedMain] [36mo.a.c.c.StandardService[0;39m - Stopping service [Tomcat] 
+2022-03-11 10:01:40,368 [restartedMain] [36mo.s.b.a.l.ConditionEvaluationReportLoggingListener[0;39m - 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled. 
+2022-03-11 10:01:40,415 [restartedMain] [36mo.s.b.d.LoggingFailureAnalysisReporter[0;39m - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Field implementation in com.ty.stores.controller.StoreController required a bean of type 'com.ty.stores.service.ServiceImplementation' that could not be found.
+
+The injection point has the following annotations:
+	- @org.springframework.beans.factory.annotation.Autowired(required=true)
+
+
+Action:
+
+Consider defining a bean of type 'com.ty.stores.service.ServiceImplementation' in your configuration.
+ 

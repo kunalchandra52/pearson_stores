@@ -1,0 +1,9 @@
+package com.ty.stores.config;
+
+import org.springframework.batch.item.ItemProcessor;
+
+import com.ty.stores.model.Store;
+
+public class StoreItemProcessor implements ItemProcessor<Store, Store> {
+
+}

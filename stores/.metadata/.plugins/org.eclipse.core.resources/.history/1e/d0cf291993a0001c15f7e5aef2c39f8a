@@ -1,0 +1,5 @@
+package com.ty.stores.exceptions;
+
+public class ErrorMessages {
+
+}
